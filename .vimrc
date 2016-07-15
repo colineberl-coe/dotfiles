@@ -182,3 +182,4 @@ let g:UltiSnipsJumpForwardTrigger="<c-l>"
 
 " Add *hql comment string
 autocmd FileType sql setlocal commentstring=--\ %s
+
