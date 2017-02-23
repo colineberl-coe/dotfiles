@@ -165,6 +165,7 @@ endif
 
 " Add key binding for snippets
 let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 
 " Add *hql comment string
