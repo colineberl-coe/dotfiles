@@ -176,6 +176,8 @@ let g:pymode_lint_checker="pep8"
 let g:pymode_folding=0
 let g:pymode_rope=0
 
+set nofoldenable
+
 augroup vimrc_autocmds
     autocmd!
     " highlight characters past column 80 (can mess with pop-up prompts)
