@@ -1,90 +1,78 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-" 
-" " set the runtime path to include Vundle and initialize
-" set rtp+=~/.vim/bundle/Vundle.vim
-" call vundle#begin()
-" " alternatively, pass a path where Vundle should install plugins
-" "call vundle#begin('~/some/path/here')
-" 
-" " let Vundle manage Vundle, required
-" Plugin 'VundleVim/Vundle.vim'
-" 
-" " git plugin for VimCompleteMe
-" Plugin 'file://~/.vim/VimCompletesMe/plugin/VimCompletesMe.vim'
-" 
-" " All of your Plugins must be added before the following line
-" call vundle#end()            " required
+set nocompatible
+
+"Pathogen
+filetype off
 execute pathogen#infect()
 execute pathogen#helptags()
 filetype on
-filetype plugin indent on    " required
+
+filetype plugin indent on
 
 nmap f <Plug>(easymotion-f)
 nmap F <Plug>(easymotion-F)
 
-" Use the Solarized Dark theme
+"Use the Solarized Dark theme
 set background=dark
-" colorscheme hybrid " solarized
+"colorscheme hybrid " solarized
 colorscheme solarized
 let g:solarized_termtrans=1
 
-" Make Vim more useful
+"Make Vim more useful
 set nocompatible
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+"Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
-" Enhance command-line completion
+"Enhance command-line completion
 set wildmenu
-" Allow cursor keys in insert mode
+"Allow cursor keys in insert mode
 set esckeys
-" Allow backspace in insert mode
+"Allow backspace in insert mode
 set backspace=indent,eol,start
-" Optimize for fast terminal connections
+"Optimize for fast terminal connections
 set ttyfast
-" Add the g flag to search/replace by default
+"Add the g flag to search/replace by default
 set gdefault
-" Use UTF-8 without BOM
+"Use UTF-8 without BOM
 set encoding=utf-8 nobomb
-" Change mapleader
+"Change mapleader
 let mapleader=","
-" Don’t add empty newlines at the end of files
+"Don’t add empty newlines at the end of files
 set binary
 set noeol
-" Centralize backups, swapfiles and undo history
+"Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 if exists("&undodir")
 	set undodir=~/.vim/undo
 endif
-" treat hql files as sql files
+"treat hql files as sql files
 au BufNewFile,BufRead *.hql set filetype=sql
 
-" Don’t create backups when editing files in certain directories
+"Don’t create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
 
-" Respect modeline in files
+"Respect modeline in files
 set modeline
 set modelines=4
-" Enable per-directory .vimrc files and disable unsafe commands in them
+"Enable per-directory .vimrc files and disable unsafe commands in them
 set exrc
 set secure
-" Enable line numbers
+"Enable line numbers
 set number
-" Enable syntax highlighting
+"Enable syntax highlighting
 syntax on
-" Highlight current line
+"Highlight current line
 set cursorline
-" Make tabs as wide as four spaces
+"Make tabs as wide as four spaces
 set ts=4
-" Auto indent enabled
+"Auto indent enabled
 set autoindent
-" expand tabs into spaces
+"expand tabs into spaces
 set expandtab
-" when using the >> or << commands, shift lines by 4 spaces
+"when using the >> or << commands, shift lines by 4 spaces
 set shiftwidth=4
-" show the matching part of the pair for [] {} and ()
+"show the matching part of the pair for [] {} and ()
 set showmatch
-" open new split panes to right and bottom
+"open new split panes to right and bottom
 set splitbelow
 set splitright
 
@@ -93,7 +81,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
 
 
 
@@ -178,8 +165,24 @@ endif
 
 " Add key binding for snippets
 let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 
 " Add *hql comment string
 autocmd FileType sql setlocal commentstring=--\ %s
 
+" Lint
+let g:pymode_lint=1
+let g:pymode_lint_checker="pep8"
+let g:pymode_folding=0
+let g:pymode_rope=0
+
+set nofoldenable
+
+augroup vimrc_autocmds
+    autocmd!
+    " highlight characters past column 80 (can mess with pop-up prompts)
+    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Yellow
+    " autocmd FileType python match Excess /\%80v.*/
+    autocmd FileType python set nowrap
+augroup END
